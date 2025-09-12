@@ -12,7 +12,7 @@ class TradingEnv(gym.Env):
         # Actions: 0 = Hold, 1 = Buy, 2 = Sell
         self.action_space = spaces.Discrete(3)
 
-        # Observations: price (can expand with indicators later)
+        # Observations: just price for now
         self.observation_space = spaces.Box(
             low=-np.inf, high=np.inf, shape=(1,), dtype=np.float32
         )
@@ -21,12 +21,14 @@ class TradingEnv(gym.Env):
         self.shares_held = 0
         self.net_worth = 10000
 
-    def reset(self):
+    def reset(self, seed=None, options=None):
+        super().reset(seed=seed)
         self.current_step = 0
         self.balance = 10000
         self.shares_held = 0
         self.net_worth = 10000
-        return [self.df.loc[self.current_step, "Close"]]
+        obs = np.array([self.df.loc[self.current_step, "Close"]], dtype=np.float32)
+        return obs, {}
 
     def step(self, action):
         price = self.df.loc[self.current_step, "Close"]
@@ -42,10 +44,11 @@ class TradingEnv(gym.Env):
         self.net_worth = self.balance + self.shares_held * price
 
         reward = self.net_worth - 10000  # profit relative to start
-        done = self.current_step >= len(self.df) - 1
-        obs = [self.df.loc[self.current_step, "Close"]]
+        terminated = self.current_step >= len(self.df) - 1
+        truncated = False
+        obs = np.array([self.df.loc[self.current_step, "Close"]], dtype=np.float32)
 
-        return obs, reward, done, {}
+        return obs, reward, terminated, truncated, {}
 
-    def render(self, mode="human"):
+    def render(self):
         print(f"Step: {self.current_step}, Net Worth: {self.net_worth}")
