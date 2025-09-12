@@ -1,0 +1,7 @@
+pandas
+numpy
+matplotlib
+seaborn
+gym==0.26
+stable-baselines3==2.0.0
+torch
