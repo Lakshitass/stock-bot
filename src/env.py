@@ -1,4 +1,4 @@
-# src/env.py
+# src/env.py# src/env.py
 import gym
 import numpy as np
 import pandas as pd
@@ -32,6 +32,7 @@ class TradingEnv(gym.Env):
         self.actions_log = []
         self.net_worth_log = []
         self.date_log = []
+        self._seed = None
 
     def _reset_internal_state(self):
         self.current_step = 0
@@ -40,8 +41,24 @@ class TradingEnv(gym.Env):
         self.net_worth = float(self.initial_balance)
         self._prev_net_worth = float(self.initial_balance)
 
-    def reset(self):
-        """Reset environment and return initial observation (Gym API)."""
+    def seed(self, seed=None):
+        """
+        Set random seed for reproducibility. Shimmy/SB3 may call env.seed(...).
+        Returns list [seed].
+        """
+        self._seed = seed
+        import random as _random
+        _random.seed(seed)
+        np.random.seed(seed if seed is not None else None)
+        return [seed]
+
+    def reset(self, seed=None):
+        """
+        Reset environment and optionally set seed (Gym compatibility).
+        """
+        if seed is not None:
+            self.seed(seed)
+
         self._reset_internal_state()
         self.actions_log = []
         self.net_worth_log = [self.net_worth]
@@ -51,10 +68,8 @@ class TradingEnv(gym.Env):
 
     def step(self, action):
         """Apply action and return (obs, reward, done, info)."""
-        # current price at this timestep
         price = float(self.df.loc[self.current_step, "Close"])
 
-        # basic trading logic
         if action == 1:  # Buy one share
             if self.balance >= price:
                 self.shares_held += 1.0
@@ -63,33 +78,24 @@ class TradingEnv(gym.Env):
             if self.shares_held >= 1.0:
                 self.shares_held -= 1.0
                 self.balance += price
-        # action == 0 -> Hold (do nothing)
 
-        # advance step
         self.current_step += 1
 
-        # clamp current_step to last index
         done = False
         if self.current_step >= len(self.df) - 1:
             done = True
-            # use last available price for final net worth calculation
             next_price = float(self.df.loc[len(self.df) - 1, "Close"])
         else:
             next_price = float(self.df.loc[self.current_step, "Close"])
 
-        # update net worth using next_price
         self.net_worth = self.balance + self.shares_held * next_price
-
-        # reward: incremental change in net worth
         reward = self.net_worth - self._prev_net_worth
         self._prev_net_worth = self.net_worth
 
-        # record logs
         self.actions_log.append(int(action))
         self.net_worth_log.append(self.net_worth)
         self.date_log.append(self.df.loc[self.current_step, "Date"])
 
-        # next observation
         obs = np.array([next_price], dtype=np.float32)
 
         info = {
