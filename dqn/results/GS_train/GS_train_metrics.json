@@ -1,0 +1,6 @@
+{
+  "stock": "GS_train",
+  "pred_csv": "results\\GS_train\\GS_train_predictions.csv",
+  "mse": 8.754861342148086e-05,
+  "directional_accuracy": 85.50596553247901
+}

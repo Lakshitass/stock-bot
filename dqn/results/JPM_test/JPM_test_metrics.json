@@ -1,0 +1,6 @@
+{
+  "stock": "JPM_test",
+  "pred_csv": "results\\JPM_test\\JPM_test_predictions.csv",
+  "mse": 0.00012158989630241268,
+  "directional_accuracy": 84.21750663129973
+}

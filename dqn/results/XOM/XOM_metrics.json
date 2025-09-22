@@ -1,0 +1,6 @@
+{
+  "stock": "XOM",
+  "pred_csv": "results\\XOM\\XOM_predictions.csv",
+  "mse": 0.00019775576333942374,
+  "directional_accuracy": 84.14634146341463
+}

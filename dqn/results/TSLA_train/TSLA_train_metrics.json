@@ -1,0 +1,6 @@
+{
+  "stock": "TSLA_train",
+  "pred_csv": "results\\TSLA_train\\TSLA_train_predictions.csv",
+  "mse": 0.0004350914961219834,
+  "directional_accuracy": 83.51237739374125
+}

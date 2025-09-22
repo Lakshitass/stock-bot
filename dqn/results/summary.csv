@@ -1,0 +1,16 @@
+stock,pred_csv,mse,directional_accuracy
+AAPL,results\AAPL\AAPL_predictions.csv,0.00011598125701152698,84.2523860021209
+AAPL_test,results\AAPL_test\AAPL_test_predictions.csv,0.00013538486247777388,82.89124668435012
+AAPL_train,results\AAPL_train\AAPL_train_predictions.csv,9.75104009116251e-05,83.69421122403888
+GS,results\GS\GS_predictions.csv,0.00012788283570362876,84.30540827147401
+GS_test,results\GS_test\GS_test_predictions.csv,0.00016004718970412876,82.49336870026525
+GS_train,results\GS_train\GS_train_predictions.csv,8.754861342148086e-05,85.50596553247901
+JPM,results\JPM\JPM_predictions.csv,0.00010493841360383173,84.11983032873806
+JPM_test,results\JPM_test\JPM_test_predictions.csv,0.00012158989630241268,84.21750663129973
+JPM_train,results\JPM_train\JPM_train_predictions.csv,7.276860928985378e-05,83.82677861246134
+TSLA,results\TSLA\TSLA_predictions.csv,0.0005114287698591991,82.49185667752444
+TSLA_test,results\TSLA_test\TSLA_test_predictions.csv,0.0013071494275598236,82.16560509554141
+TSLA_train,results\TSLA_train\TSLA_train_predictions.csv,0.0004350914961219834,83.51237739374125
+XOM,results\XOM\XOM_predictions.csv,0.00019775576333942374,84.14634146341463
+XOM_test,results\XOM_test\XOM_test_predictions.csv,9.933985536545447e-05,86.0079575596817
+XOM_train,results\XOM_train\XOM_train_predictions.csv,4.531981020523873e-05,83.73840035351303

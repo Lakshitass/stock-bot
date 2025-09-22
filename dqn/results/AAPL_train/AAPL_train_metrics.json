@@ -1,0 +1,6 @@
+{
+  "stock": "AAPL_train",
+  "pred_csv": "results\\AAPL_train\\AAPL_train_predictions.csv",
+  "mse": 9.75104009116251e-05,
+  "directional_accuracy": 83.69421122403888
+}

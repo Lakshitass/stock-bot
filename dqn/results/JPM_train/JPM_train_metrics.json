@@ -1,0 +1,6 @@
+{
+  "stock": "JPM_train",
+  "pred_csv": "results\\JPM_train\\JPM_train_predictions.csv",
+  "mse": 7.276860928985378e-05,
+  "directional_accuracy": 83.82677861246134
+}

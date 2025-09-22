@@ -1,0 +1,6 @@
+{
+  "stock": "GS_test",
+  "pred_csv": "results\\GS_test\\GS_test_predictions.csv",
+  "mse": 0.00016004718970412876,
+  "directional_accuracy": 82.49336870026525
+}
